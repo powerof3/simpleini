@@ -2665,7 +2665,9 @@ CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::Save(
                     if (!convert.ConvertToStore(iValue->pItem)) {
                         return SI_FAIL;
                     }
-                    a_oOutput.Write(m_bSpaces ? " = " : "=");
+                    if (!m_bAllowKeyOnly) {
+                        a_oOutput.Write(m_bSpaces ? " = " : "=");
+                    }
                     if (m_bParseQuotes && IsSingleLineQuotedValue(iValue->pItem)) {
                         // the only way to preserve external whitespace on a value (i.e. before or after)
                         // is to quote it. This is simple quoting, we don't escape quotes within the data. 
